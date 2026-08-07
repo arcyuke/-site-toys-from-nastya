@@ -1,0 +1,18 @@
+const CART_KEY = 'nastusha-toys-cart';
+const SHOP_TELEGRAM = 'SKIANORAK';
+const DATA_URL = 'assets/data/products.json';
+
+function money(value){return `${new Intl.NumberFormat('ru-RU').format(Number(value)||0)} ₽`}
+function getCart(){try{return JSON.parse(localStorage.getItem(CART_KEY))||[]}catch{return []}}
+function saveCart(cart){localStorage.setItem(CART_KEY,JSON.stringify(cart));updateCartCounter()}
+function updateCartCounter(){const count=getCart().reduce((sum,item)=>sum+item.quantity,0);document.querySelectorAll('[data-cart-count]').forEach(node=>node.textContent=count)}
+function productImage(product){return product.images?.[0]||''}
+function safeText(value){return String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]))}
+function notify(text){let toast=document.querySelector('.toast');if(!toast){toast=document.createElement('div');toast.className='toast';document.body.append(toast)}toast.textContent=text;toast.classList.add('show');clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>toast.classList.remove('show'),2400)}
+async function loadProducts(){const response=await fetch(`${DATA_URL}?v=${Date.now()}`,{cache:'no-store'});if(!response.ok)throw new Error('Не удалось загрузить каталог');return response.json()}
+function addToCart(productId){const cart=getCart();const found=cart.find(item=>item.id===productId);if(found)found.quantity+=1;else cart.push({id:productId,quantity:1});saveCart(cart);notify('Игрушка уже в корзинке ♡')}
+
+function footerMarkup(){return `<footer class="main-footer"><div class="footer-content"><div class="footer-brand"><a class="logo" href="index.html">♡ Настюшины игрушки</a><p>Маленький магазин тёплых игрушек, милых подарков и героев, которых хочется обнять.</p></div><div class="footer-section"><h3>Покупателям</h3><p><a href="index.html#catalog">каталог</a></p><p><a href="bag.html">корзинка</a></p><p><a href="about.html">о магазине</a></p></div><div class="footer-section"><h3>Связаться</h3><p><a href="https://t.me/${SHOP_TELEGRAM}" target="_blank" rel="noreferrer">Telegram @${SHOP_TELEGRAM}</a></p><p>поможем выбрать и оформить заказ</p><p><a class="admin-entry" href="admin.html">админка</a></p></div></div><div class="footer-bottom">© <span data-year></span> Магазин игрушек Настюши · сделано с любовью</div></footer>`}
+function mountFloaties(){const root=document.querySelector('[data-floaties]');if(!root||matchMedia('(prefers-reduced-motion:reduce)').matches)return;const types=['pixel-heart','pixel-star','float-kitty','pixel-heart','pixel-star'];for(let i=0;i<12;i++){const node=document.createElement('span');const type=types[i%types.length];node.className=`floatie ${type}`;if(type==='pixel-star')node.textContent=i%2?'✦':'♡';node.style.setProperty('--left',`${3+(i*17)%94}%`);node.style.setProperty('--duration',`${15+(i%5)*3}s`);node.style.setProperty('--delay',`${-i*2.7}s`);root.append(node)}}
+function initNavigation(){const button=document.querySelector('.nav-toggle');const links=document.querySelector('.nav-links');if(!button||!links)return;button.addEventListener('click',()=>{const open=links.classList.toggle('open');button.setAttribute('aria-expanded',String(open));button.textContent=open?'×':'☰'});links.addEventListener('click',()=>{links.classList.remove('open');button.setAttribute('aria-expanded','false');button.textContent='☰'})}
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[data-site-footer]').forEach(node=>node.innerHTML=footerMarkup());document.querySelectorAll('[data-year]').forEach(node=>node.textContent=new Date().getFullYear());updateCartCounter();initNavigation();mountFloaties()});

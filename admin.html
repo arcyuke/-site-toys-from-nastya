@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><title>Админка — Настюшины игрушки</title>
+  <link rel="stylesheet" href="assets/css/site.css"><link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body class="admin-body">
+  <header class="site-header"><nav class="nav-shell"><a class="logo" href="index.html"><span>♡</span> Настюшины игрушки</a><div class="nav-links"><a href="index.html">в магазин</a></div></nav></header>
+  <main class="admin-shell">
+    <div class="admin-heading"><p class="eyebrow">управление магазином</p><h1 class="page-title">Админка</h1></div>
+    <section class="login-panel" id="login-panel">
+      <h2>Вход для владельца</h2>
+      <p>Введите GitHub token с доступом <strong>Contents: Read and write</strong> к репозиторию <code>arcyuke/-</code>. Token хранится только до закрытия вкладки.</p>
+      <details><summary>Как создать token</summary><ol><li>GitHub → Settings → Developer settings.</li><li>Fine-grained tokens → Generate new token.</li><li>Выберите репозиторий <b>arcyuke/-</b>.</li><li>Repository permissions → Contents → Read and write.</li></ol></details>
+      <label>GitHub token<input id="token" type="password" autocomplete="off" placeholder="github_pat_…"></label>
+      <button class="admin-button" id="login" type="button">войти</button><p class="admin-message" id="login-message"></p>
+    </section>
+
+    <section id="editor" hidden>
+      <div class="editor-toolbar"><div><strong id="editor-status"></strong><p>Товары и фотографии сохраняются прямо в магазин.</p></div><div class="editor-actions"><button class="admin-button soft" id="add-product" type="button">+ товар</button><button class="admin-button" id="save" type="button">сохранить всё</button><button class="admin-button ghost" id="logout" type="button">выйти</button></div></div>
+      <p class="admin-message sticky-message" id="save-message"></p>
+      <div class="product-editor" id="product-editor"></div>
+    </section>
+  </main>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Магазин игрушек Настюши — тёплые игрушки, подарки и маленькие радости.">
+  <meta name="theme-color" content="#ffd7e8">
+  <title>Магазин игрушек Настюши</title>
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <div data-floaties aria-hidden="true"></div>
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Главная навигация">
+      <a class="logo" href="index.html"><span>♡</span> Настюшины игрушки</a>
+      <button class="nav-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="#catalog">игрушки</a>
+        <a href="about.html">о магазине</a>
+        <a class="bag-link" href="bag.html">корзинка <b data-cart-count>0</b></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-bubble bubble-one"></div><div class="hero-bubble bubble-two"></div>
+      <div class="pixel-friends cats" aria-hidden="true"><span class="pixel-animal cat-a"></span><span class="tiny-heart">♥</span><span class="pixel-animal cat-b"></span></div>
+      <div class="hero-copy">
+        <p class="eyebrow">магазин маленьких радостей</p>
+        <h1>Игрушки,<br><em>которые обнимают</em></h1>
+        <p>Мягкие друзья, милые подарки и вещицы, которые хочется сохранить надолго.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#catalog">выбрать игрушку</a>
+          <a class="button secondary" href="about.html">познакомиться</a>
+        </div>
+        <div class="trust-row" aria-label="Преимущества"><span>♡ бережная упаковка</span><span>♡ помощь с выбором</span><span>♡ сделано с теплом</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img class="hero-sprite-sheet" src="assets/images/decor/pixel-friends.png" alt="">
+        <div class="plush-card"><span class="plush-face">ʕ•ᴥ•ʔ</span><i>для тебя</i></div>
+        <div class="sparkle s1">✦</div><div class="sparkle s2">✦</div><div class="sparkle s3">♡</div>
+      </div>
+    </section>
+
+    <section class="marquee" aria-hidden="true"><div>♡ игрушки для объятий ✦ маленькие чудеса ♡ подарки с сердцем ✦ игрушки для объятий ♡ маленькие чудеса ✦ подарки с сердцем</div></section>
+
+    <section class="catalog-section" id="catalog">
+      <div class="section-heading">
+        <p class="eyebrow">выбери своего нового друга</p>
+        <h2>Настюшины любимчики</h2>
+      </div>
+      <div class="filter-row" id="filters" aria-label="Фильтры каталога"></div>
+      <div class="products-grid" id="products-grid" aria-live="polite"><p class="loading">Собираем игрушки на полочках…</p></div>
+    </section>
+
+    <section class="story-strip">
+      <img class="story-sprite-sheet" src="assets/images/decor/pixel-friends.png" alt="" aria-hidden="true">
+      <div class="bear-friends" aria-hidden="true"><span class="pixel-bear"></span><span class="holding-hands"></span><span class="pixel-bear second"></span></div>
+      <div><p class="eyebrow">подарок уже ждёт</p><h2>У каждой игрушки<br>есть своя история</h2></div>
+      <p>Мы выбираем добрых, тактильных и необычных героев — для детей, взрослых и всех, кому иногда нужны объятия.</p>
+    </section>
+
+    <section class="promise-grid">
+      <article><b>01</b><h3>Выбираем с душой</h3><p>Только те игрушки, которые нравятся нам самим.</p></article>
+      <article><b>02</b><h3>Упаковываем нежно</h3><p>Бумага, ленточка и маленький сюрприз внутри.</p></article>
+      <article><b>03</b><h3>Отправляем к вам</h3><p>Уточняем детали и бережно передаём заказ доставке.</p></article>
+    </section>
+  </main>
+
+  <div data-site-footer></div>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/catalog.js"></script>
+</body>
+</html>
