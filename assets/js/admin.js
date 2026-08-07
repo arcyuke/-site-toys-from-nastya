@@ -1,5 +1,5 @@
 const OWNER='arcyuke';
-const REPO='-';
+const REPO='-site-toys-from-nastya';
 const BRANCH='main';
 const FILE_PATH='assets/data/products.json';
 const SESSION_KEY='nastusha-toys-admin';
