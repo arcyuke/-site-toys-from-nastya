@@ -2,23 +2,21 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Магазин игрушек Настюши — мягкие друзья, милые подарки и маленькие радости.">
-  <meta property="og:title" content="Настюшины игрушки">
-  <meta property="og:description" content="игрушки, которые хочется обнять">
-  <meta property="og:type" content="website">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Магазин игрушек Настюши — мобильный каталог">
   <title>Магазин игрушек Настюши</title>
-  <script src="assets/js/view-router.js"></script>
-  <link rel="stylesheet" href="assets/css/site.css">
-  <link rel="stylesheet" href="assets/css/toy-theme.css">
+  <script src="../assets/js/view-router.js"></script>
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/mobilebasic.css">
+  <link rel="stylesheet" href="../assets/css/mobile-spacing-footer.css">
+  <link rel="stylesheet" href="../assets/css/toy-theme.css">
 </head>
-<body>
+<body class="mobile-basic">
   <header class="site-header">
     <nav class="nav-shell" aria-label="главная навигация">
       <a class="logo" href="index.html">♡ настюшины игрушки</a>
       <div class="nav-links">
         <a href="#catalog">игрушки</a>
-        <a href="about.html">о магазине</a>
         <a href="bag.html">корзинка (<span id="cart-count">0</span>)</a>
       </div>
     </nav>
@@ -27,18 +25,23 @@
   <main>
     <section class="hero">
       <div class="hero-media toy-hero-media" aria-hidden="true">
-        <img src="assets/images/decor/pixel-friends.png" alt="">
+        <img src="../assets/images/decor/pixel-friends.png" alt="">
       </div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <p class="hero-kicker">маленькие друзья · большие объятия</p>
         <h1>настюшины<br>игрушки</h1>
-        <p>мягкие игрушки, милые подарки и герои, которых хочется забрать домой</p>
+        <p>мягкие игрушки, милые подарки и герои для объятий</p>
         <div class="hero-actions">
           <a class="button button-light" href="#catalog">каталог</a>
           <a class="button button-ghost" href="about.html">о магазине</a>
         </div>
       </div>
+      <div class="hero-scroll-cue" aria-hidden="true"><span></span></div>
+    </section>
+
+    <section class="mobile-placeholder toy-love-note" aria-label="пожелание">
+      <span>♡ выбери своего нового друга ♡</span>
     </section>
 
     <section class="catalog-section" id="catalog" data-reveal>
@@ -48,13 +51,13 @@
 
     <section class="process-section" data-reveal>
       <div><h2>у каждой игрушки — своя история</h2></div>
-      <p>выбираем добрых героев, красиво упаковываем и помогаем найти подарок, который запомнится надолго.</p>
+      <p>бережно выбираем, красиво упаковываем и отправляем игрушки к новым друзьям.</p>
     </section>
   </main>
 
   <div data-site-footer></div>
   <div id="custom-alert" class="custom-alert" role="status" aria-live="polite"></div>
-  <script src="assets/js/common.js"></script>
-  <script src="assets/js/site.js"></script>
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/site.js"></script>
 </body>
 </html>

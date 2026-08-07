@@ -1,0 +1,53 @@
+/* точечные мобильные правки: отдельная заглушка и подвал у нижнего края */
+body.mobile-basic{
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+}
+
+.mobile-basic > header{
+  flex:0 0 auto;
+}
+
+.mobile-basic > main{
+  flex:1 0 auto;
+}
+
+.mobile-basic > [data-site-footer]{
+  margin-top:auto;
+  flex:0 0 auto;
+}
+
+/* вернуть первый экран к исходному размеру мобильной версии */
+.mobile-basic .hero{
+  height:315px;
+  min-height:0;
+  max-height:none;
+}
+
+/* отдельный временный блок между видео и каталогом */
+.mobile-basic .mobile-placeholder{
+  height:96px;
+  margin:0;
+  display:grid;
+  place-items:center;
+  background:#000;
+  border-top:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.mobile-basic .mobile-placeholder span{
+  color:rgba(255,255,255,.2);
+  font-size:9px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+
+.mobile-basic .catalog-section{
+  margin-top:0;
+}
+
+@supports not (min-height:100svh){
+  body.mobile-basic{min-height:100vh}
+}
+

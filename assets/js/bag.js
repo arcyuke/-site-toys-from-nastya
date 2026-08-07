@@ -1,6 +1,71 @@
-let products=[];
-function changeQuantity(id,delta){const cart=getCart();const item=cart.find(entry=>entry.id===id);if(!item)return;item.quantity=Math.max(0,item.quantity+delta);saveCart(cart.filter(entry=>entry.quantity>0));renderCart()}
-function removeItem(id){saveCart(getCart().filter(item=>item.id!==id));renderCart()}
-function orderText(cart){const lines=['Здравствуйте! Хочу заказать в магазине игрушек Настюши:',''];cart.forEach(item=>{const product=products.find(entry=>entry.id===item.id);if(product)lines.push(`• ${product.name} — ${item.quantity} шт. × ${money(product.price)}`)});const total=cart.reduce((sum,item)=>{const product=products.find(entry=>entry.id===item.id);return sum+(product?.price||0)*item.quantity},0);lines.push('',`Итого: ${money(total)}`);const name=document.getElementById('customer-name')?.value.trim();const contact=document.getElementById('customer-contact')?.value.trim();const note=document.getElementById('customer-note')?.value.trim();if(name)lines.push(`Имя: ${name}`);if(contact)lines.push(`Связь: ${contact}`);if(note)lines.push(`Комментарий: ${note}`);return lines.join('\n')}
-function renderCart(){const cart=getCart();const itemsRoot=document.getElementById('cart-items');const summary=document.getElementById('cart-summary');if(!cart.length){itemsRoot.innerHTML='<div class="empty-cart"><div class="empty-icon">🧺</div><p>Корзинка пока пустая — давайте найдём кого-нибудь милого.</p><a class="button primary" href="index.html#catalog">смотреть игрушки</a></div>';summary.innerHTML='';return}itemsRoot.innerHTML=cart.map(item=>{const product=products.find(entry=>entry.id===item.id);if(!product)return'';const image=productImage(product);return `<article class="cart-item"><div class="cart-item-media">${image?`<img src="${safeText(image)}" alt="">`:safeText(product.emoji||'♡')}</div><div><h3>${safeText(product.name)}</h3><p>${money(product.price)} за штуку</p></div><div><div class="qty"><button type="button" data-minus="${safeText(item.id)}">−</button><strong>${item.quantity}</strong><button type="button" data-plus="${safeText(item.id)}">+</button></div><button class="remove-item" type="button" data-remove="${safeText(item.id)}">убрать</button></div></article>`}).join('');const total=cart.reduce((sum,item)=>{const product=products.find(entry=>entry.id===item.id);return sum+(product?.price||0)*item.quantity},0);summary.innerHTML=`<div class="summary-row"><span>Итого</span><span>${money(total)}</span></div><div class="checkout-form"><input id="customer-name" placeholder="Как вас зовут"><input id="customer-contact" placeholder="Ваш Telegram или телефон"><textarea id="customer-note" placeholder="Комментарий к заказу (необязательно)"></textarea><button class="checkout-button" id="checkout" type="button">оформить через Telegram ♡</button></div>`;itemsRoot.querySelectorAll('[data-minus]').forEach(button=>button.onclick=()=>changeQuantity(button.dataset.minus,-1));itemsRoot.querySelectorAll('[data-plus]').forEach(button=>button.onclick=()=>changeQuantity(button.dataset.plus,1));itemsRoot.querySelectorAll('[data-remove]').forEach(button=>button.onclick=()=>removeItem(button.dataset.remove));document.getElementById('checkout').onclick=()=>{const contact=document.getElementById('customer-contact').value.trim();if(!contact){notify('Оставьте Telegram или телефон, чтобы мы могли ответить ♡');document.getElementById('customer-contact').focus();return}const text=orderText(cart);window.open(`https://t.me/${SHOP_TELEGRAM}?text=${encodeURIComponent(text)}`,'_blank','noopener')}}
-document.addEventListener('DOMContentLoaded',async()=>{try{products=await loadProducts();renderCart()}catch(error){console.error(error);document.getElementById('cart-items').innerHTML='<p class="empty">Не получилось открыть корзинку. Обновите страницу.</p>'}});
+const TELEGRAM_USERNAME = 'SKIANORAK';
+const MOBILE_BASIC = /\/mobilebasic(?:\/|$)/.test(window.location.pathname);
+
+function getCart(){try{return JSON.parse(localStorage.getItem('cart_guest'))||[]}catch{return[]}}
+function saveCart(cart){localStorage.setItem('cart_guest',JSON.stringify(cart))}
+function money(value){return `${new Intl.NumberFormat('ru-RU').format(value)} ₽`}
+function cartImage(path){
+  if(!path||/^(?:[a-z]+:|\/|#)/i.test(path))return path;
+  return MOBILE_BASIC?`../${path}`:path;
+}
+
+function renderCart(){
+  const itemsNode=document.getElementById('cart-items');
+  const summaryNode=document.getElementById('cart-summary');
+  const checkoutPanel=document.getElementById('checkout-panel');
+  const cart=getCart();
+  if(!cart.length){
+    itemsNode.innerHTML='<p class="empty-cart">корзинка пока пуста ♡</p>';
+    summaryNode.innerHTML='';
+    checkoutPanel.hidden=true;
+    return;
+  }
+  itemsNode.innerHTML=cart.map((item,index)=>`
+    <article class="cart-item">
+      <img src="${cartImage(item.image)}" alt="${item.name}">
+      <div>
+        <h2>${item.name}</h2>
+        <p>вариант: ${item.size}</p>
+        <div class="quantity-controls">
+          <button data-action="minus" data-index="${index}" aria-label="уменьшить количество">−</button>
+          <span>${item.quantity}</span>
+          <button data-action="plus" data-index="${index}" aria-label="увеличить количество">+</button>
+        </div>
+        <button class="remove-item" data-action="remove" data-index="${index}">удалить</button>
+      </div>
+      <div class="cart-item-total">${money(item.price*item.quantity)}</div>
+    </article>`).join('');
+  const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0);
+  summaryNode.innerHTML=`<button class="clear-cart" id="clear-cart">очистить</button><strong>итого: ${money(total)}</strong>`;
+  checkoutPanel.hidden=false;
+
+  document.querySelectorAll('[data-action]').forEach((button)=>button.addEventListener('click',()=>changeCart(button.dataset.action,Number(button.dataset.index))));
+  document.getElementById('clear-cart')?.addEventListener('click',()=>{saveCart([]);renderCart()});
+}
+
+function changeCart(action,index){
+  const cart=getCart();
+  const item=cart[index];
+  if(!item)return;
+  if(action==='plus'&&item.quantity<item.stock)item.quantity+=1;
+  if(action==='minus')item.quantity-=1;
+  if(action==='remove'||item.quantity<=0)cart.splice(index,1);
+  saveCart(cart);
+  renderCart();
+}
+
+function checkout(){
+  const cart=getCart();
+  const contact=document.getElementById('contact').value.trim();
+  if(!cart.length)return;
+  if(contact.length<3){alert('укажите telegram или телефон');return}
+  const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0);
+  const lines=['привет! хочу оформить заказ в магазине игрушек Настюши ♡','',...cart.map((item,index)=>`${index+1}. ${item.name}\nвариант: ${item.size}\nколичество: ${item.quantity}\nсумма: ${money(item.price*item.quantity)}`),'',`итого: ${money(total)}`,`контакт: ${contact}`];
+  const url=`https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(lines.join('\n'))}`;
+  window.open(url,'_blank','noopener');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  renderCart();
+  document.getElementById('checkout')?.addEventListener('click',checkout);
+});

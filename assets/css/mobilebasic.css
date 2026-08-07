@@ -1,0 +1,135 @@
+/* отдельная компактная мобильная версия магазина игрушек Настюши */
+body.mobile-basic{font-size:13px;padding-bottom:78px}
+.mobile-basic .nav-shell{padding:8px 10px;gap:8px}
+.mobile-basic .site-header.is-scrolled .nav-shell{padding-top:7px;padding-bottom:7px}
+.mobile-basic .logo{font-size:22px}
+.mobile-basic .nav-links{gap:9px}
+.mobile-basic .nav-links a{font-size:14px}
+.mobile-basic .nav-links a:nth-child(2){display:inline-flex}
+.mobile-basic .hero{height:calc(100svh - 48px);min-height:520px;max-height:780px}
+.mobile-basic .hero-media video{transform:translate3d(0,var(--hero-media-y,0),0) scale(var(--hero-media-scale,1.055));will-change:transform}
+.mobile-basic .hero-content{width:calc(100% - 24px);padding:24px 0;transform:translate3d(0,var(--hero-content-y,0),0);opacity:var(--hero-content-opacity,1);will-change:transform,opacity}
+.mobile-basic .hero-kicker{font-size:9px}
+.mobile-basic .hero h1{font-size:58px;margin:5px 0 9px;text-shadow:0 0 24px rgba(255,255,255,.06)}
+.mobile-basic .hero-content>p:not(.hero-kicker){font-size:11px;max-width:290px}
+.mobile-basic .hero-actions{gap:7px;margin-top:14px}
+.mobile-basic .button{min-width:0;width:auto;padding:6px 12px;font-size:14px;position:relative;overflow:hidden}
+.mobile-basic .hero-scroll-cue{position:absolute;left:50%;bottom:15px;z-index:2;width:18px;height:30px;transform:translateX(-50%);border:1px solid rgba(255,255,255,.48);border-radius:14px;opacity:.72}
+.mobile-basic .hero-scroll-cue span{position:absolute;left:50%;top:6px;width:3px;height:6px;border-radius:2px;background:#fff;transform:translateX(-50%);animation:scrollCue 1.65s ease-in-out infinite}
+.mobile-basic .catalog-section{padding:34px 8px 38px;scroll-margin-top:48px;position:relative}
+.mobile-basic .section-heading{margin-bottom:15px}
+.mobile-basic .section-heading h2,.mobile-basic .process-section h2{font-size:28px}
+.mobile-basic .products-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.mobile-basic .product-card{min-width:0;transition-delay:var(--card-delay,0ms);transform-origin:center;position:relative}
+.mobile-basic .product-link{position:relative;overflow:hidden}
+.mobile-basic .product-card.is-visible.is-pressed{transform:scale(.972)}
+.mobile-basic .product-image{height:auto;aspect-ratio:3/4;position:relative}
+.mobile-basic .product-image::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 24%,rgba(255,255,255,.07) 45%,transparent 66%);transform:translateX(-110%);animation:imageShimmer 1.4s ease-in-out infinite;transition:opacity .28s}
+.mobile-basic .product-card.image-ready .product-image::after{opacity:0;animation:none}
+.mobile-basic .product-image img{transform:scale(1.045);transition:transform .65s cubic-bezier(.2,.7,.2,1)}
+.mobile-basic .product-card.is-visible .product-image img{transform:scale(1)}
+.mobile-basic .product-badge{left:6px;top:6px;padding:3px 5px;font-size:7px;letter-spacing:.07em}
+.mobile-basic .product-content{padding:7px}
+.mobile-basic .product-title{font-size:15px;line-height:1}
+.mobile-basic .product-description{font-size:9px;line-height:1.3;margin:5px 0 7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mobile-basic .product-row{display:block}
+.mobile-basic .product-price{font-size:12px}
+.mobile-basic .product-stock{font-size:8px;text-align:left;margin-top:3px;line-height:1.2}
+.mobile-basic .process-section{grid-template-columns:1fr;padding:24px 10px;margin:0 8px 38px;gap:12px}
+.mobile-basic .process-section>p{font-size:11px}
+.mobile-basic .main-footer{padding:27px 0 14px}
+.mobile-basic .footer-content{padding:0 10px;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 10px}
+.mobile-basic .footer-section:last-child{grid-column:1/-1}
+.mobile-basic .footer-section h3{font-size:16px;margin-bottom:7px}
+.mobile-basic .footer-section p{font-size:10px;margin:4px 0}
+.mobile-basic .footer-bottom{margin-top:18px;padding-top:10px;font-size:9px}
+.mobile-basic .page-shell{padding:29px 10px 45px}
+.mobile-basic .page-title{font-size:37px;margin-bottom:15px}
+.mobile-basic .text-panel{padding:18px 14px;font-size:12px}
+.mobile-basic .custom-alert{right:10px;bottom:72px;padding:8px 11px;font-size:10px}
+
+.mobile-basic .product-page{padding:13px 9px 40px}
+.mobile-basic .product-layout{gap:18px}
+.mobile-basic .product-page .product-gallery,.mobile-basic .product-page .product-info{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .62s cubic-bezier(.2,.7,.2,1)}
+.mobile-basic .product-page .product-info{transition-delay:.1s}
+.mobile-basic .product-page.product-ready .product-gallery,.mobile-basic .product-page.product-ready .product-info{opacity:1;transform:none}
+.mobile-basic .product-gallery{width:min(100%,315px);max-width:315px}
+.mobile-basic .gallery-main{max-width:315px}
+.mobile-basic .gallery-thumbs{max-width:315px;gap:4px}
+.mobile-basic .gallery-arrow{width:27px;height:36px;font-size:18px}
+.mobile-basic .gallery-counter{font-size:8px;padding:2px 5px}
+.mobile-basic .product-info{max-width:420px}
+.mobile-basic .detail-badge{font-size:8px;padding:3px 6px;margin-bottom:8px}
+.mobile-basic .detail-title{font-size:27px}
+.mobile-basic .detail-price{font-size:15px;margin:9px 0}
+.mobile-basic .detail-description{font-size:11px;margin-bottom:13px}
+.mobile-basic .size-grid{gap:5px}
+.mobile-basic .size-option{min-height:34px;padding:5px 7px;position:relative;overflow:hidden}
+.mobile-basic .size-option.selection-pop{animation:sizePop .34s ease-out}
+.mobile-basic .size-label{font-size:11px}
+.mobile-basic .size-stock{font-size:8px}
+.mobile-basic .selected-stock{font-size:9px;min-height:14px}
+.mobile-basic .primary-action{margin-top:9px;padding:8px;font-size:15px;position:relative;overflow:hidden}
+.mobile-basic .detail-section{margin-top:16px;padding-top:13px}
+.mobile-basic .detail-section h2{font-size:17px}
+.mobile-basic .detail-section ul,.mobile-basic .detail-section p{font-size:10px}
+
+.mobile-basic .bag-shell{padding:30px 9px 50px}
+.mobile-basic .cart-items{gap:8px}
+.mobile-basic .cart-item{grid-template-columns:66px 1fr;padding:8px;gap:9px}
+.mobile-basic .cart-item img{width:66px;height:88px}
+.mobile-basic .cart-item h2{font-size:14px}
+.mobile-basic .cart-item p{font-size:10px}
+.mobile-basic .quantity-controls{gap:8px;margin-top:8px}
+.mobile-basic .quantity-controls button{width:25px;height:25px}
+.mobile-basic .remove-item{font-size:10px;margin-top:7px}
+.mobile-basic .cart-item-total{font-size:11px}
+.mobile-basic .cart-summary{font-size:15px;margin-top:17px;padding:15px 0}
+.mobile-basic .checkout-panel{margin-top:18px;padding:14px}
+.mobile-basic .checkout-panel input{padding:10px}
+.mobile-basic .checkout-button{margin-top:10px;padding:10px;font-size:13px;position:relative;overflow:hidden}
+
+.mobile-cart-dock{position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:90;display:flex;align-items:center;gap:8px;min-height:42px;padding:8px 10px 8px 13px;border:1px solid rgba(255,255,255,.5);background:rgba(8,8,8,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#fff;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.38);overflow:hidden;transform:translateZ(0)}
+.mobile-cart-label{font-family:"Monotype Corsiva",cursive;font-style:italic;font-size:16px;line-height:1}
+.mobile-cart-count{display:grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:99px;background:#fff;color:#000;font-size:11px;font-weight:600}
+.mobile-cart-dock.is-pulsing{animation:cartPulse .44s ease-out}
+.scroll-progress{position:fixed;left:0;top:0;z-index:150;width:100%;height:2px;background:#fff;transform:scaleX(0);transform-origin:left center;pointer-events:none;will-change:transform}
+.tap-ripple{position:absolute;z-index:0;border-radius:50%;background:rgba(255,255,255,.18);transform:scale(0);pointer-events:none;animation:tapRipple .48s ease-out forwards}
+.button>*:not(.tap-ripple),.primary-action>*:not(.tap-ripple),.checkout-button>*:not(.tap-ripple),.product-link>*:not(.tap-ripple){position:relative;z-index:1}
+.catalog-section.catalog-focus .section-heading{animation:catalogFocus .65s ease-out}
+[data-reveal]{transition-delay:var(--reveal-delay,0ms)}
+.mobile-basic .hero.is-entering .hero-kicker{animation:heroLineIn .55s .05s both}
+.mobile-basic .hero.is-entering h1{animation:heroTitleIn .75s .12s cubic-bezier(.2,.7,.2,1) both}
+.mobile-basic .hero.is-entering .hero-content>p:not(.hero-kicker){animation:heroLineIn .62s .24s both}
+.mobile-basic .hero.is-entering .hero-actions{animation:heroLineIn .62s .34s both}
+
+@keyframes scrollCue{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,10px)}}
+@keyframes imageShimmer{0%{transform:translateX(-110%)}100%{transform:translateX(110%)}}
+@keyframes cartPulse{0%{transform:scale(1)}45%{transform:scale(1.09)}100%{transform:scale(1)}}
+@keyframes tapRipple{to{transform:scale(1);opacity:0}}
+@keyframes catalogFocus{0%{opacity:.45;transform:translateY(8px)}100%{opacity:1;transform:none}}
+@keyframes heroLineIn{0%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:none}}
+@keyframes heroTitleIn{0%{opacity:0;transform:translateY(18px) scale(.96)}100%{opacity:1;transform:none}}
+@keyframes sizePop{0%{transform:scale(1)}45%{transform:scale(.95)}100%{transform:scale(1)}}
+
+@supports not (height:100svh){
+  .mobile-basic .hero{height:calc(100vh - 48px)}
+}
+
+@media(max-width:350px){
+  .mobile-basic .nav-links{gap:7px}
+  .mobile-basic .nav-links a{font-size:12.5px}
+  .mobile-basic .logo{font-size:21px}
+  .mobile-basic .products-grid{gap:6px}
+  .mobile-basic .product-content{padding:6px}
+  .mobile-basic .product-title{font-size:14px}
+  .mobile-basic .product-description{font-size:8.5px}
+  .mobile-cart-dock{right:8px;padding:7px 9px 7px 11px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .mobile-basic .hero-media video,.mobile-basic .hero-content,.mobile-basic .product-image img,.mobile-basic .product-page .product-gallery,.mobile-basic .product-page .product-info{transform:none!important;transition:none!important;opacity:1!important}
+  .mobile-basic .hero-scroll-cue span,.mobile-basic .product-image::after,.mobile-cart-dock.is-pulsing,.mobile-basic .hero.is-entering *,.mobile-basic .size-option.selection-pop{animation:none!important}
+  .scroll-progress{display:none}
+  .tap-ripple{display:none}
+}
